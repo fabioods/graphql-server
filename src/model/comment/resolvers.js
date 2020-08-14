@@ -19,7 +19,7 @@ const getCommentsByName = async (_, args) => {
   return response;
 };
 
-const getCommentsByUser = async (parent) => {
+const getUserById = async (parent) => {
   return await userModel.findById(parent.user_id);
 };
 
@@ -28,5 +28,5 @@ export {
   getAllComments,
   getCommentsByName,
   removeOneComment,
-  getCommentsByUser,
+  getUserById,
 };

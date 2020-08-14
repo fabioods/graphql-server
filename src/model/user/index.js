@@ -1,6 +1,16 @@
 import userType from './typeDefs';
-import { GraphQLList, GraphQLNonNull } from 'graphql';
-import { getAllUsers, insertOneUser } from './resolver';
+import {
+  GraphQLList,
+  GraphQLNonNull,
+  GraphQLBoolean,
+  GraphQLString,
+} from 'graphql';
+import {
+  getAllUsers,
+  createOneUser,
+  createOneUserWithAddresses,
+  removeOneUser,
+} from './resolver';
 import UserInput from './input';
 
 const users = {
@@ -8,14 +18,34 @@ const users = {
   resolve: getAllUsers,
 };
 
-const inserOneUser = {
+const insertOneUser = {
   type: userType,
   args: {
     input: {
       type: GraphQLNonNull(UserInput),
     },
   },
-  resolve: insertOneUser,
+  resolve: createOneUser,
+};
+
+const inserOneUserWithAddress = {
+  type: userType,
+  args: {
+    input: {
+      type: GraphQLNonNull(UserInput),
+    },
+  },
+  resolve: createOneUserWithAddresses,
+};
+
+const deleteOneUser = {
+  type: GraphQLBoolean,
+  args: {
+    id: {
+      type: GraphQLString,
+    },
+  },
+  resolve: removeOneUser,
 };
 
 const schema = {
@@ -23,7 +53,9 @@ const schema = {
     users,
   },
   mutation: {
-    inserOneUser,
+    insertOneUser,
+    inserOneUserWithAddress,
+    deleteOneUser,
   },
 };
 

@@ -3,7 +3,9 @@ import {
   GraphQLString,
   GraphQLBoolean,
   GraphQLNonNull,
+  GraphQLList,
 } from 'graphql';
+import addressInput from '../address/input';
 
 const UserInput = new GraphQLInputObjectType({
   name: 'UserInput',
@@ -16,6 +18,9 @@ const UserInput = new GraphQLInputObjectType({
     },
     status: {
       type: GraphQLNonNull(GraphQLBoolean),
+    },
+    addresses: {
+      type: GraphQLList(addressInput),
     },
   },
 });

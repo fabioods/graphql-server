@@ -6,9 +6,9 @@ import {
 } from 'graphql';
 import { GraphQLDateTime } from 'graphql-iso-date';
 import UserType from '../user/typeDefs';
-import { getCommentsByUser } from './resolvers';
+import { getUserById } from './resolvers';
 
-const comment = new GraphQLObjectType({
+const commentType = new GraphQLObjectType({
   name: 'CommentType',
   fields: () => ({
     id: {
@@ -25,7 +25,7 @@ const comment = new GraphQLObjectType({
     },
     user: {
       type: UserType,
-      resolve: getCommentsByUser,
+      resolve: getUserById,
     },
     createdAt: {
       type: GraphQLNonNull(GraphQLDateTime),
@@ -36,4 +36,4 @@ const comment = new GraphQLObjectType({
   }),
 });
 
-export default comment;
+export default commentType;

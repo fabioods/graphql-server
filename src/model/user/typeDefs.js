@@ -5,8 +5,9 @@ import {
   GraphQLList,
   GraphQLObjectType,
 } from 'graphql';
-import comment from '../comment/typeDefs';
-import { getAllCommentsByUser } from './resolver';
+import commentType from '../comment/typeDefs';
+import { getAllCommentsByUser, getAddressesByUser } from './resolver';
+import addressType from '../address/typeDef';
 
 const UserType = new GraphQLObjectType({
   name: 'UserType',
@@ -24,8 +25,12 @@ const UserType = new GraphQLObjectType({
       type: GraphQLBoolean,
     },
     comments: {
-      type: GraphQLList(comment),
+      type: GraphQLList(commentType),
       resolve: getAllCommentsByUser,
+    },
+    addresses: {
+      type: GraphQLList(addressType),
+      resolve: getAddressesByUser,
     },
   }),
 });
