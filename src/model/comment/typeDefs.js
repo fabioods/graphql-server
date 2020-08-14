@@ -1,11 +1,16 @@
-import { GraphQLObjectType, GraphQLNonNull, GraphQLString } from 'graphql';
+import {
+  GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLString,
+  GraphQLID,
+} from 'graphql';
 import { GraphQLDateTime } from 'graphql-iso-date';
 
 const comment = new GraphQLObjectType({
   name: 'comment_type',
   fields: {
     id: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLNonNull(GraphQLID),
     },
     name: {
       type: GraphQLNonNull(GraphQLString),

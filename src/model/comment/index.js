@@ -5,7 +5,7 @@ import {
   GraphQLNonNull,
 } from 'graphql';
 import typeDefs from './typeDefs';
-import model from './model';
+import { insertOneComment, comments, commentsByName } from './resolvers';
 
 const insertOneComment = {
   type: typeDefs,
@@ -15,7 +15,7 @@ const insertOneComment = {
         name: 'CommentInput',
         fields: {
           name: {
-            type: GraphQLString,
+            type: GraphQLNonNull(GraphQLString),
           },
           content: {
             type: GraphQLString,
@@ -24,18 +24,12 @@ const insertOneComment = {
       }),
     },
   },
-  resolve: async (_, args) => {
-    const response = await model.create(args.input);
-    return response;
-  },
+  resolve: insertOneComment,
 };
 
 const getComents = {
   type: GraphQLList(typeDefs),
-  resolve: async () => {
-    const response = await model.find();
-    return response;
-  },
+  resolve: comments,
 };
 
 const getCommentsByName = {
@@ -43,10 +37,7 @@ const getCommentsByName = {
   args: {
     name: { type: GraphQLNonNull(GraphQLString) },
   },
-  resolve: async (_, args) => {
-    const response = await model.find({ name: args.name });
-    return response;
-  },
+  resolve: commentsByName,
 };
 
 const schema = {
