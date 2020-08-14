@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const schema = new Schema(
   {
@@ -6,13 +6,13 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    content: {
+    login: {
       type: String,
       required: true,
     },
-    user_id: {
-      type: Schema.Types.ObjectId,
-      ref: 'user',
+    status: {
+      type: Boolean,
+      required: true,
     },
   },
   {
@@ -20,4 +20,4 @@ const schema = new Schema(
   }
 );
 
-export default model('comment', schema);
+export default model('user', schema);

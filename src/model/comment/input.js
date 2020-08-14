@@ -1,13 +1,16 @@
-import { GraphQLInputObjectType, GraphQLString } from 'graphql';
+import { GraphQLInputObjectType, GraphQLString, GraphQLNonNull } from 'graphql';
 
 const CommentInput = new GraphQLInputObjectType({
   name: 'CommentInput',
   fields: {
     name: {
-      type: GraphQLString,
+      type: GraphQLNonNull(GraphQLString),
     },
     content: {
-      type: GraphQLString,
+      type: GraphQLNonNull(GraphQLString),
+    },
+    user_id: {
+      type: GraphQLNonNull(GraphQLString),
     },
   },
 });

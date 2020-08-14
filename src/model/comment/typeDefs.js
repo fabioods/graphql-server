@@ -5,18 +5,27 @@ import {
   GraphQLID,
 } from 'graphql';
 import { GraphQLDateTime } from 'graphql-iso-date';
+import UserType from '../user/typeDefs';
+import { getCommentsByUser } from './resolvers';
 
 const comment = new GraphQLObjectType({
   name: 'CommentType',
-  fields: {
+  fields: () => ({
     id: {
-      type: GraphQLNonNull(GraphQLID),
+      type: GraphQLID,
     },
     name: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
     },
     content: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
+    },
+    user_id: {
+      type: GraphQLString,
+    },
+    user: {
+      type: UserType,
+      resolve: getCommentsByUser,
     },
     createdAt: {
       type: GraphQLNonNull(GraphQLDateTime),
@@ -24,7 +33,7 @@ const comment = new GraphQLObjectType({
     updatedAt: {
       type: GraphQLNonNull(GraphQLDateTime),
     },
-  },
+  }),
 });
 
 export default comment;

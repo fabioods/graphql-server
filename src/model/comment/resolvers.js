@@ -1,4 +1,5 @@
 import model from './model';
+import userModel from '../user/model';
 const createOneComment = async (_, args) => {
   const response = await model.create(args.input);
   return response;
@@ -18,9 +19,14 @@ const getCommentsByName = async (_, args) => {
   return response;
 };
 
+const getCommentsByUser = async (parent) => {
+  return await userModel.findById(parent.user_id);
+};
+
 export {
   createOneComment,
   getAllComments,
   getCommentsByName,
   removeOneComment,
+  getCommentsByUser,
 };
