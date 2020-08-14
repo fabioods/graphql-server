@@ -1,52 +1,58 @@
 import {
   GraphQLList,
   GraphQLString,
-  GraphQLInputObjectType,
   GraphQLNonNull,
+  GraphQLID,
+  GraphQLBoolean,
 } from 'graphql';
-import typeDefs from './typeDefs';
-import { insertOneComment, comments, commentsByName } from './resolvers';
+import CommentType from './typeDefs';
+import {
+  createOneComment,
+  removeOneComment,
+  getAllComments,
+  getCommentsByName,
+} from './resolvers';
+import { CommentInput } from './input';
 
 const insertOneComment = {
-  type: typeDefs,
+  type: CommentType,
   args: {
     input: {
-      type: new GraphQLInputObjectType({
-        name: 'CommentInput',
-        fields: {
-          name: {
-            type: GraphQLNonNull(GraphQLString),
-          },
-          content: {
-            type: GraphQLString,
-          },
-        },
-      }),
+      type: GraphQLNonNull(CommentInput),
     },
   },
-  resolve: insertOneComment,
+  resolve: createOneComment,
 };
 
-const getComents = {
-  type: GraphQLList(typeDefs),
-  resolve: comments,
+const deleteOneComment = {
+  type: GraphQLBoolean,
+  args: {
+    id: { type: GraphQLNonNull(GraphQLID) },
+  },
+  resolve: removeOneComment,
 };
 
-const getCommentsByName = {
-  type: GraphQLList(typeDefs),
+const comments = {
+  type: GraphQLList(CommentType),
+  resolve: getAllComments,
+};
+
+const commentByName = {
+  type: GraphQLList(CommentType),
   args: {
     name: { type: GraphQLNonNull(GraphQLString) },
   },
-  resolve: commentsByName,
+  resolve: getCommentsByName,
 };
 
 const schema = {
   queries: {
-    getComents,
-    getCommentsByName,
+    comments,
+    commentByName,
   },
   mutation: {
     insertOneComment,
+    deleteOneComment,
   },
 };
 

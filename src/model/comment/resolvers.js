@@ -1,17 +1,26 @@
 import model from './model';
-const insertOneComment = async (_, args) => {
+const createOneComment = async (_, args) => {
   const response = await model.create(args.input);
   return response;
 };
 
-const comments = async () => {
+const removeOneComment = async (_, args) => {
+  return !!(await model.findByIdAndRemove(args.id));
+};
+
+const getAllComments = async () => {
   const response = await model.find();
   return response;
 };
 
-const commentsByName = async (_, args) => {
+const getCommentsByName = async (_, args) => {
   const response = await model.find({ name: args.name });
   return response;
 };
 
-export { insertOneComment, comments, commentsByName };
+export {
+  createOneComment,
+  getAllComments,
+  getCommentsByName,
+  removeOneComment,
+};

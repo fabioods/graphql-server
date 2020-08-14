@@ -7,7 +7,7 @@ import {
 import { GraphQLDateTime } from 'graphql-iso-date';
 
 const comment = new GraphQLObjectType({
-  name: 'comment_type',
+  name: 'CommentType',
   fields: {
     id: {
       type: GraphQLNonNull(GraphQLID),
