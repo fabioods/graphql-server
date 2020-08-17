@@ -12,7 +12,7 @@ const getAllCommentsByUser = async (parent) => {
 };
 
 const getAddressesByUser = async (parent) => {
-  return await addressModel.find({ user_id: parent.id });
+  return await addressModel.find({ user_id: parent._id });
 };
 
 const createOneUser = async (_, args) => {
@@ -23,8 +23,7 @@ const createOneUserWithAddresses = async (_, { input }) => {
   const { addresses } = input;
   const createUser = await userModel.create(input);
   addresses.map(async (address) => {
-    console.log(address);
-    address.user_id = createUser.id;
+    address.user_id = createUser._id;
     await addressModel.create(address);
   });
   return createUser;

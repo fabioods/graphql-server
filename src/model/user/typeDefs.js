@@ -12,7 +12,7 @@ import addressType from '../address/typeDef';
 const UserType = new GraphQLObjectType({
   name: 'UserType',
   fields: () => ({
-    id: {
+    _id: {
       type: GraphQLID,
     },
     name: {
