@@ -5,10 +5,10 @@ import {
   GraphQLNonNull,
   GraphQLList,
 } from 'graphql';
-import addressInput from '../address/input';
+import addressInputs from '../address/inputs';
 
-const UserInput = new GraphQLInputObjectType({
-  name: 'UserInput',
+const userInputType = new GraphQLInputObjectType({
+  name: 'userInputType',
   fields: {
     name: {
       type: GraphQLNonNull(GraphQLString),
@@ -20,9 +20,13 @@ const UserInput = new GraphQLInputObjectType({
       type: GraphQLNonNull(GraphQLBoolean),
     },
     addresses: {
-      type: GraphQLList(addressInput),
+      type: GraphQLList(addressInputs.addressInputType),
     },
   },
 });
 
-export default UserInput;
+const userInputs = {
+  userInputType,
+};
+
+export default userInputs;

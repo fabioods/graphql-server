@@ -6,11 +6,11 @@ import {
   GraphQLObjectType,
 } from 'graphql';
 import commentType from '../comment/typeDefs';
-import { getAllCommentsByUser, getAddressesByUser } from './resolver';
-import addressType from '../address/typeDef';
+import userResolvers from './resolvers';
+import addressType from '../address/typeDefs';
 
-const UserType = new GraphQLObjectType({
-  name: 'UserType',
+const userTypes = new GraphQLObjectType({
+  name: 'userTypes',
   fields: () => ({
     _id: {
       type: GraphQLID,
@@ -26,13 +26,13 @@ const UserType = new GraphQLObjectType({
     },
     comments: {
       type: GraphQLList(commentType),
-      resolve: getAllCommentsByUser,
+      resolve: userResolvers.getAllCommentsByUser,
     },
     addresses: {
       type: GraphQLList(addressType),
-      resolve: getAddressesByUser,
+      resolve: userResolvers.getAddressesByUser,
     },
   }),
 });
 
-export default UserType;
+export default userTypes;

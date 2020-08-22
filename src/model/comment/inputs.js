@@ -1,7 +1,7 @@
 import { GraphQLInputObjectType, GraphQLString, GraphQLNonNull } from 'graphql';
 
-const CommentInput = new GraphQLInputObjectType({
-  name: 'CommentInput',
+const commentInputType = new GraphQLInputObjectType({
+  name: 'commentInputType',
   fields: {
     name: {
       type: GraphQLNonNull(GraphQLString),
@@ -15,4 +15,8 @@ const CommentInput = new GraphQLInputObjectType({
   },
 });
 
-export { CommentInput };
+const commentInputs = {
+  commentInputType,
+};
+
+export default commentInputs;

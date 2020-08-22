@@ -5,7 +5,7 @@ import {
   GraphQLID,
 } from 'graphql';
 import userType from '../user/typeDefs';
-import { getUserById } from '../user/resolver';
+import userResolvers from '../user/resolvers';
 
 const addressType = new GraphQLObjectType({
   name: 'addressType',
@@ -27,7 +27,7 @@ const addressType = new GraphQLObjectType({
     },
     user: {
       type: userType,
-      resolve: getUserById,
+      resolve: userResolvers.getUserById,
     },
   }),
 });

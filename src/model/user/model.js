@@ -14,6 +14,9 @@ const schema = new Schema(
       type: Boolean,
       required: true,
     },
+    addresses: {
+      type: [{ type: Schema.Types.ObjectId, ref: 'address' }],
+    },
   },
   {
     timestamps: true,

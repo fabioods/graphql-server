@@ -5,8 +5,8 @@ import {
   GraphQLInt,
 } from 'graphql';
 
-const addressInput = new GraphQLInputObjectType({
-  name: 'addressInput',
+const addressInputType = new GraphQLInputObjectType({
+  name: 'addressInputType',
   fields: {
     street: {
       type: GraphQLNonNull(GraphQLString),
@@ -23,4 +23,8 @@ const addressInput = new GraphQLInputObjectType({
   },
 });
 
-export default addressInput;
+const addressInputs = {
+  addressInputType,
+};
+
+export default addressInputs;

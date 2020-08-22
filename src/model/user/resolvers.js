@@ -26,18 +26,25 @@ const createOneUserWithAddresses = async (_, { input }) => {
     address.user_id = createUser._id;
     await addressModel.create(address);
   });
-  return createUser;
+  return await userModel.findById(createUser._id);
 };
 
 const removeOneUser = async (_, { id }) => {
   return !!(await userModel.findByIdAndRemove(id));
 };
 
-export {
+const getUserById = async (parent) => {
+  return await userModel.findById(parent.user_id);
+};
+
+const userResolvers = {
   getAllUsers,
   getAllCommentsByUser,
   getAddressesByUser,
   createOneUser,
   createOneUserWithAddresses,
   removeOneUser,
+  getUserById,
 };
+
+export default userResolvers;

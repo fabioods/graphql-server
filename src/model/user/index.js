@@ -1,41 +1,36 @@
-import userType from './typeDefs';
 import {
   GraphQLList,
   GraphQLNonNull,
   GraphQLBoolean,
   GraphQLString,
 } from 'graphql';
-import {
-  getAllUsers,
-  createOneUser,
-  createOneUserWithAddresses,
-  removeOneUser,
-} from './resolver';
-import UserInput from './input';
+import userType from './typeDefs';
+import userResolvers from './resolvers';
+import userInputs from './inputs';
 
 const users = {
   type: GraphQLList(userType),
-  resolve: getAllUsers,
+  resolve: userResolvers.getAllUsers,
 };
 
 const insertOneUser = {
   type: userType,
   args: {
     input: {
-      type: GraphQLNonNull(UserInput),
+      type: GraphQLNonNull(userInputs.userInputType),
     },
   },
-  resolve: createOneUser,
+  resolve: userResolvers.createOneUser,
 };
 
 const inserOneUserWithAddress = {
   type: userType,
   args: {
     input: {
-      type: GraphQLNonNull(UserInput),
+      type: GraphQLNonNull(userInputs.userInputType),
     },
   },
-  resolve: createOneUserWithAddresses,
+  resolve: userResolvers.createOneUserWithAddresses,
 };
 
 const deleteOneUser = {
@@ -45,7 +40,7 @@ const deleteOneUser = {
       type: GraphQLString,
     },
   },
-  resolve: removeOneUser,
+  resolve: userResolvers.removeOneUser,
 };
 
 const schema = {

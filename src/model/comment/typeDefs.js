@@ -1,15 +1,10 @@
-import {
-  GraphQLObjectType,
-  GraphQLNonNull,
-  GraphQLString,
-  GraphQLID,
-} from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLID } from 'graphql';
 import { GraphQLDateTime } from 'graphql-iso-date';
-import UserType from '../user/typeDefs';
-import { getUserById } from './resolvers';
+import userType from '../user/typeDefs';
+import userResolvers from '../user/resolvers';
 
 const commentType = new GraphQLObjectType({
-  name: 'CommentType',
+  name: 'commentType',
   fields: () => ({
     id: {
       type: GraphQLID,
@@ -24,14 +19,14 @@ const commentType = new GraphQLObjectType({
       type: GraphQLString,
     },
     user: {
-      type: UserType,
-      resolve: getUserById,
+      type: userType,
+      resolve: userResolvers.getUserById,
     },
     createdAt: {
-      type: GraphQLNonNull(GraphQLDateTime),
+      type: GraphQLDateTime,
     },
     updatedAt: {
-      type: GraphQLNonNull(GraphQLDateTime),
+      type: GraphQLDateTime,
     },
   }),
 });

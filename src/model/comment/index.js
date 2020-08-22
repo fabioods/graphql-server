@@ -5,23 +5,18 @@ import {
   GraphQLID,
   GraphQLBoolean,
 } from 'graphql';
-import CommentType from './typeDefs';
-import {
-  createOneComment,
-  removeOneComment,
-  getAllComments,
-  getCommentsByName,
-} from './resolvers';
-import { CommentInput } from './input';
+import commentType from './typeDefs';
+import commentResolvers from './resolvers';
+import commentInputs from './inputs';
 
 const insertOneComment = {
-  type: CommentType,
+  type: commentType,
   args: {
     input: {
-      type: GraphQLNonNull(CommentInput),
+      type: GraphQLNonNull(commentInputs.commentInputType),
     },
   },
-  resolve: createOneComment,
+  resolve: commentResolvers.createOneComment,
 };
 
 const deleteOneComment = {
@@ -29,20 +24,20 @@ const deleteOneComment = {
   args: {
     id: { type: GraphQLNonNull(GraphQLID) },
   },
-  resolve: removeOneComment,
+  resolve: commentResolvers.removeOneComment,
 };
 
 const comments = {
-  type: GraphQLList(CommentType),
-  resolve: getAllComments,
+  type: GraphQLList(commentType),
+  resolve: commentResolvers.getAllComments,
 };
 
 const commentByName = {
-  type: GraphQLList(CommentType),
+  type: GraphQLList(commentType),
   args: {
     name: { type: GraphQLNonNull(GraphQLString) },
   },
-  resolve: getCommentsByName,
+  resolve: commentResolvers.getCommentsByName,
 };
 
 const schema = {

@@ -1,21 +1,21 @@
 import { GraphQLList } from 'graphql';
-import addressType from './typeDef';
-import addressInput from './input';
-import { createOneAddress, getAllAddress } from './resolver';
+import addressType from './typeDefs';
+import addressInputs from './inputs';
+import addressResolvers from './resolvers';
 
 const insertOneAddress = {
   type: addressType,
   args: {
     input: {
-      type: addressInput,
+      type: addressInputs.addressInputType,
     },
   },
-  resolve: createOneAddress,
+  resolve: addressResolvers.createOneAddress,
 };
 
 const address = {
   type: GraphQLList(addressType),
-  resolve: getAllAddress,
+  resolve: addressResolvers.getAllAddress,
 };
 
 const schema = {

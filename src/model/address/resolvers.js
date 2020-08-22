@@ -8,4 +8,9 @@ const getAllAddress = async () => {
   return await addressModel.find();
 };
 
-export { createOneAddress, getAllAddress };
+const addressResolvers = {
+  createOneAddress,
+  getAllAddress,
+};
+
+export default addressResolvers;
