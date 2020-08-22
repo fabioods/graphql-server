@@ -9,8 +9,8 @@ import commentType from '../comment/typeDefs';
 import userResolvers from './resolvers';
 import addressType from '../address/typeDefs';
 
-const userTypes = new GraphQLObjectType({
-  name: 'userTypes',
+const userType = new GraphQLObjectType({
+  name: 'userType',
   fields: () => ({
     _id: {
       type: GraphQLID,
@@ -35,4 +35,4 @@ const userTypes = new GraphQLObjectType({
   }),
 });
 
-export default userTypes;
+export default userType;
